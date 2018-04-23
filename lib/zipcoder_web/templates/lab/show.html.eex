@@ -1,0 +1,18 @@
+<h2>Show Lab</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @lab.name %>
+  </li>
+
+  <li>
+    <strong>Repo name:</strong>
+    <%= @lab.repo_name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: lab_path(@conn, :edit, @lab) %></span>
+<span><%= link "Back", to: lab_path(@conn, :index) %></span>

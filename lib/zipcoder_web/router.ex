@@ -11,6 +11,8 @@ defmodule ZipcoderWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+
+    post "/labs/statuses", ZipcoderWeb.StatusController, :create_hook
   end
 
   scope "/", ZipcoderWeb do
@@ -19,6 +21,9 @@ defmodule ZipcoderWeb.Router do
     get "/", PageController, :index
     post "/students/create_all", StudentController, :create_all
     resources "/students", StudentController
+
+    resources "/labs", LabController
+    resources "/lab_statuses", StatusController
   end
 
   # Other scopes may use custom stacks.
