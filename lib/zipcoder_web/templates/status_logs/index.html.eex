@@ -1,0 +1,26 @@
+<h2>Listing Status logs</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Message</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for status_logs <- @status_logs do %>
+    <tr>
+      <td><%= status_logs.message %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: status_logs_path(@conn, :show, status_logs), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: status_logs_path(@conn, :edit, status_logs), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: status_logs_path(@conn, :delete, status_logs), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Status logs", to: status_logs_path(@conn, :new) %></span>

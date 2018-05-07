@@ -68,9 +68,9 @@ defmodule Zipcoder.LabsTest do
   describe "lab_statuses" do
     alias Zipcoder.Labs.Status
 
-    @valid_attrs %{status: "some status", student_id: 42}
-    @update_attrs %{status: "some updated status", student_id: 43}
-    @invalid_attrs %{status: nil, student_id: nil}
+    @valid_attrs %{name: "some name"}
+    @update_attrs %{name: "some updated name"}
+    @invalid_attrs %{name: nil}
 
     def status_fixture(attrs \\ %{}) do
       {:ok, status} =
@@ -93,8 +93,7 @@ defmodule Zipcoder.LabsTest do
 
     test "create_status/1 with valid data creates a status" do
       assert {:ok, %Status{} = status} = Labs.create_status(@valid_attrs)
-      assert status.status == "some status"
-      assert status.student_id == 42
+      assert status.name == "some name"
     end
 
     test "create_status/1 with invalid data returns error changeset" do
@@ -105,8 +104,7 @@ defmodule Zipcoder.LabsTest do
       status = status_fixture()
       assert {:ok, status} = Labs.update_status(status, @update_attrs)
       assert %Status{} = status
-      assert status.status == "some updated status"
-      assert status.student_id == 43
+      assert status.name == "some updated name"
     end
 
     test "update_status/2 with invalid data returns error changeset" do
@@ -124,6 +122,66 @@ defmodule Zipcoder.LabsTest do
     test "change_status/1 returns a status changeset" do
       status = status_fixture()
       assert %Ecto.Changeset{} = Labs.change_status(status)
+    end
+  end
+
+  describe "status_logs" do
+    alias Zipcoder.Labs.StatusLogs
+
+    @valid_attrs %{message: "some message"}
+    @update_attrs %{message: "some updated message"}
+    @invalid_attrs %{message: nil}
+
+    def status_logs_fixture(attrs \\ %{}) do
+      {:ok, status_logs} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Labs.create_status_logs()
+
+      status_logs
+    end
+
+    test "list_status_logs/0 returns all status_logs" do
+      status_logs = status_logs_fixture()
+      assert Labs.list_status_logs() == [status_logs]
+    end
+
+    test "get_status_logs!/1 returns the status_logs with given id" do
+      status_logs = status_logs_fixture()
+      assert Labs.get_status_logs!(status_logs.id) == status_logs
+    end
+
+    test "create_status_logs/1 with valid data creates a status_logs" do
+      assert {:ok, %StatusLogs{} = status_logs} = Labs.create_status_logs(@valid_attrs)
+      assert status_logs.message == "some message"
+    end
+
+    test "create_status_logs/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Labs.create_status_logs(@invalid_attrs)
+    end
+
+    test "update_status_logs/2 with valid data updates the status_logs" do
+      status_logs = status_logs_fixture()
+      assert {:ok, status_logs} = Labs.update_status_logs(status_logs, @update_attrs)
+      assert %StatusLogs{} = status_logs
+      assert status_logs.message == "some updated message"
+    end
+
+    test "update_status_logs/2 with invalid data returns error changeset" do
+      status_logs = status_logs_fixture()
+      assert {:error, %Ecto.Changeset{}} = Labs.update_status_logs(status_logs, @invalid_attrs)
+      assert status_logs == Labs.get_status_logs!(status_logs.id)
+    end
+
+    test "delete_status_logs/1 deletes the status_logs" do
+      status_logs = status_logs_fixture()
+      assert {:ok, %StatusLogs{}} = Labs.delete_status_logs(status_logs)
+      assert_raise Ecto.NoResultsError, fn -> Labs.get_status_logs!(status_logs.id) end
+    end
+
+    test "change_status_logs/1 returns a status_logs changeset" do
+      status_logs = status_logs_fixture()
+      assert %Ecto.Changeset{} = Labs.change_status_logs(status_logs)
     end
   end
 end

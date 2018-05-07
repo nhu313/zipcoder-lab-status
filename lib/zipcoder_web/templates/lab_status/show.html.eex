@@ -1,0 +1,28 @@
+<h2>Show Lab status</h2>
+
+<ul>
+
+  <li>
+    <strong>Student:</strong>
+    <%= @lab_status.student_id %>
+  </li>
+
+  <li>
+    <strong>Lab:</strong>
+    <%= @lab_status.lab_id %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @lab_status.status_id %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @lab_status.url %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: lab_status_path(@conn, :edit, @lab_status) %></span>
+<span><%= link "Back", to: lab_status_path(@conn, :index) %></span>

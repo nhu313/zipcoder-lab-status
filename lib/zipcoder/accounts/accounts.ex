@@ -37,6 +37,10 @@ defmodule Zipcoder.Accounts do
   """
   def get_student!(id), do: Repo.get!(Student, id)
 
+  def get_student_by_gitusername(username) do
+    Repo.get_by(Student, gitusername: username)
+  end
+
   @doc """
   Creates a student.
 
@@ -101,4 +105,5 @@ defmodule Zipcoder.Accounts do
   def change_student(%Student{} = student) do
     Student.changeset(student, %{})
   end
+
 end

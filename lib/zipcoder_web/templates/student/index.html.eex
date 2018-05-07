@@ -1,4 +1,4 @@
-<h2>Listing Students</h2>
+<h2>Students</h2>
 
 <%= form_for @conn, student_path(@conn, :create_all), [multipart: true], fn f -> %>
   <%= file_input f, :file %>

@@ -8,7 +8,7 @@ defmodule Zipcoder.Accounts.StudentServiceTest do
 
     test "create_students" do
       file = %{path: Path.expand("../..//data/student.csv", __DIR__)}
-      results = StudentService.create_all(file)
+      StudentService.create_all(file)
 
       assert length(Repo.all(Student)) == 2
     end

@@ -1,0 +1,5 @@
+<h2>Edit Lab status</h2>
+
+<%= render "form.html", Map.put(assigns, :action, lab_status_path(@conn, :update, @lab_status)) %>
+
+<span><%= link "Back", to: lab_status_path(@conn, :index) %></span>

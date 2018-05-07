@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :zipcoder, Zipcoder.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "nhunguyen",
+  password: "",
   database: "zipcoder_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

@@ -1,0 +1,32 @@
+<h2>Listing Student lab statuses</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Lab</th>
+      <th>Status</th>
+      <th>Url</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for lab_status <- @student_lab_statuses do %>
+    <tr>
+      <td><%= lab_status.student_id %></td>
+      <td><%= lab_status.lab_id %></td>
+      <td><%= lab_status.status_id %></td>
+      <td><%= lab_status.url %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: lab_status_path(@conn, :show, lab_status), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: lab_status_path(@conn, :edit, lab_status), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: lab_status_path(@conn, :delete, lab_status), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Lab status", to: lab_status_path(@conn, :new) %></span>

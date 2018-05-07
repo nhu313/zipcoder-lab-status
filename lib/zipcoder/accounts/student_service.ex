@@ -24,7 +24,7 @@ defmodule Zipcoder.Accounts.StudentService do
   defp to_student({:ok, [first_name, last_name, gitusername | _]}) do
     %{first_name: first_name,
       last_name: last_name,
-      gitusername: gitusername}
+      gitusername: String.downcase(gitusername)}
   end
 
 end

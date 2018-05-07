@@ -1,0 +1,26 @@
+<h2>Listing Lab statuses</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for status <- @lab_statuses do %>
+    <tr>
+      <td><%= status.name %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: status_path(@conn, :show, status), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: status_path(@conn, :edit, status), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: status_path(@conn, :delete, status), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Status", to: status_path(@conn, :new) %></span>

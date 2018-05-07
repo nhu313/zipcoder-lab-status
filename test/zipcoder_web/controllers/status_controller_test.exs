@@ -3,9 +3,9 @@ defmodule ZipcoderWeb.StatusControllerTest do
 
   alias Zipcoder.Labs
 
-  @create_attrs %{status: "some status", student_id: 42}
-  @update_attrs %{status: "some updated status", student_id: 43}
-  @invalid_attrs %{status: nil, student_id: nil}
+  @create_attrs %{name: "some name"}
+  @update_attrs %{name: "some updated name"}
+  @invalid_attrs %{name: nil}
 
   def fixture(:status) do
     {:ok, status} = Labs.create_status(@create_attrs)
@@ -60,7 +60,7 @@ defmodule ZipcoderWeb.StatusControllerTest do
       assert redirected_to(conn) == status_path(conn, :show, status)
 
       conn = get conn, status_path(conn, :show, status)
-      assert html_response(conn, 200) =~ "some updated status"
+      assert html_response(conn, 200) =~ "some updated name"
     end
 
     test "renders errors when data is invalid", %{conn: conn, status: status} do

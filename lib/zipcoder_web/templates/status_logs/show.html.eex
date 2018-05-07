@@ -1,0 +1,13 @@
+<h2>Show Status logs</h2>
+
+<ul>
+
+  <li>
+    <strong>Message:</strong>
+    <%= @status_logs.message %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: status_logs_path(@conn, :edit, @status_logs) %></span>
+<span><%= link "Back", to: status_logs_path(@conn, :index) %></span>
