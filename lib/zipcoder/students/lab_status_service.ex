@@ -17,17 +17,17 @@ defmodule Zipcoder.Students.LabStatusService do
                                                     url: parsed_json.url
                                                   })
 
-    log(Poison.encode(json), result)
+    log(Poison.encode(json), parsed_json.url, result)
 
     result
   end
 
-  defp log({:ok, message}, {:ok, %Student{id: lab_status_id}}) do
-    Labs.create_status_logs(%{message: message, student_lab_status_id: lab_status_id})
+  defp log({:ok, message}, url, {:ok, %Student{id: lab_status_id}}) do
+    Labs.create_status_logs(%{message: message, lab_status_id: lab_status_id, url: url})
   end
 
-  defp log({:ok, message}, _) do
-    Labs.create_status_logs(%{message: message})
+  defp log({:ok, message}, url, _) do
+    Labs.create_status_logs(%{message: message, url: url})
   end
 
   def parse_json(json) do

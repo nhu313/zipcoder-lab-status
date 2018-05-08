@@ -5,7 +5,8 @@ defmodule Zipcoder.Labs.StatusLogs do
 
   schema "status_logs" do
     field :message, :string
-    field :student_lab_status_id, :integer
+    field :lab_status_id, :integer
+    field :url, :string
 
     timestamps()
   end
@@ -13,7 +14,7 @@ defmodule Zipcoder.Labs.StatusLogs do
   @doc false
   def changeset(status_logs, attrs) do
     status_logs
-    |> cast(attrs, [:message, :student_lab_status_id])
+    |> cast(attrs, [:message, :lab_status_id, :url])
     |> validate_required([:message])
   end
 end

@@ -3,6 +3,12 @@ defmodule ZipcoderWeb.LabStatusController do
 
   alias Zipcoder.Students
   alias Zipcoder.Students.LabStatus
+  alias Zipcoder.Students.LabStatusService
+
+  def create_hook(conn, params) do
+    LabStatusService.create(params)
+    text(conn, "Created!")
+  end
 
   def index(conn, _params) do
     student_lab_statuses = Students.list_student_lab_statuses()

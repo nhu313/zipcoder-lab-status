@@ -30,6 +30,6 @@ defmodule ZipcoderWeb.Router do
   scope "/api", ZipcoderWeb do
     pipe_through :api
 
-    post "/labs/statuses", ZipcoderWeb.StatusController, :create_hook
+    post "/labs/statuses", LabStatusController, :create_hook
   end
 end

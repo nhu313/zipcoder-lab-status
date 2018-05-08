@@ -13,6 +13,15 @@
   </head>
 
   <body>
+    <div>
+      <ul class="nav">
+        <li class="nav-item"><a class="nav-link" href="/students">Students</a></li>
+        <li class="nav-item"><a class="nav-link" href="/students/new">Add Student</a></li>
+        <li class="nav-item"><a class="nav-link" href="/labs">Labs</a></li>
+        <li class="nav-item"><a class="nav-link" href="/labs/new">Add Lab</a></li>
+        <li class="nav-item"><a class="nav-link" href="/lab_statuses">Statuses</a></li>
+        <li class="nav-item"><a class="nav-link" href="/lab_statuses/new">Add PR Status</a></li>
+      </ul>
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
