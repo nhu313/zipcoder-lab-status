@@ -1,20 +1,2 @@
 <div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="/students">Students</a>
-        <ul><li><a href="/students/new">Add</a></li></ul>
-      </li>
-      <li>
-        <a href="/labs">Labs</a>
-        <ul><li><a href="/labs/new">Add</a></li></ul>
-      </li>
-      <li>
-        <a href="/lab_statuses">Statuses</a>
-        <ul><li><a href="/lab_statuses/new">Add</a></li></ul>
-      </li>
-    </ul>
-  </div>
-
 </div>

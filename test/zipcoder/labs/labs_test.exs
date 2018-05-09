@@ -2,6 +2,9 @@ defmodule Zipcoder.LabsTest do
   use Zipcoder.DataCase
 
   alias Zipcoder.Labs
+  alias Zipcoder.Accounts
+  alias Zipcoder.Students
+
 
   describe "labs" do
     alias Zipcoder.Labs.Lab
@@ -62,6 +65,44 @@ defmodule Zipcoder.LabsTest do
     test "change_lab/1 returns a lab changeset" do
       lab = lab_fixture()
       assert %Ecto.Changeset{} = Labs.change_lab(lab)
+    end
+
+    test "labs_without_pr/1 does not returns the lab with PR" do
+      lab = lab_fixture()
+      {:ok, student} = Accounts.create_student(%{first_name: "nhu", last_name: "NN", gitusername: "nhu313"})
+      Students.create_lab_status(%{lab_id: lab.id, student_id: student.id})
+
+      assert Labs.labs_without_pr(student) == []
+    end
+
+    test "labs_without_pr/1 returns labs without PR" do
+      lab = lab_fixture()
+      {:ok, watever_student} = Accounts.create_student(%{first_name: "wat", last_name: "ever", gitusername: "watever"})
+      Students.create_lab_status(%{lab_id: lab.id, student_id: watever_student.id})
+
+      {:ok, student} = Accounts.create_student(%{first_name: "nhu", last_name: "NN", gitusername: "nhu313"})
+
+      [fetched_lab] = Labs.labs_without_pr(student)
+      assert fetched_lab.id == lab.id
+    end
+
+    test "students_without_pr_for_lab/1 does not returns student with PR" do
+      lab = lab_fixture()
+      {:ok, student} = Accounts.create_student(%{first_name: "nhu", last_name: "NN", gitusername: "nhu313"})
+      Students.create_lab_status(%{lab_id: lab.id, student_id: student.id})
+
+      assert Labs.students_without_pr_for_lab(lab) == []
+    end
+
+    test "students_without_pr_for_lab/1 returns students without PR" do
+      lab = lab_fixture()
+      lab2 = lab_fixture()
+
+      {:ok, student} = Accounts.create_student(%{first_name: "nhu", last_name: "NN", gitusername: "nhu313"})
+      Students.create_lab_status(%{lab_id: lab2.id, student_id: student.id})
+
+      [student] = Labs.students_without_pr_for_lab(lab)
+      assert student.id == student.id
     end
   end
 

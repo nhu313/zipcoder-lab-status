@@ -1,13 +1,16 @@
 defmodule Zipcoder.Students.LabStatus do
   use Ecto.Schema
   import Ecto.Changeset
-
+  alias Zipcoder.Labs.Lab
+  alias Zipcoder.Labs.Status
+  alias Zipcoder.Accounts.Student
 
   schema "student_lab_statuses" do
-    field :lab_id, :integer
-    field :student_id, :integer
-    field :status_id, :integer
     field :url, :string
+
+    belongs_to :lab, Lab
+    belongs_to :status, Status
+    belongs_to :student, Student
 
     timestamps()
   end

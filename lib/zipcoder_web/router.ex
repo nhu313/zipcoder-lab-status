@@ -17,13 +17,13 @@ defmodule ZipcoderWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/students/lab_statuses", LabStatusController
     post "/students/create_all", StudentController, :create_all
     resources "/students", StudentController
 
     resources "/labs/status_logs", StatusLogsController
     resources "/labs", LabController
     resources "/lab_statuses", StatusController
-    resources "/student_lab_statuses", LabStatusController
   end
 
   # Other scopes may use custom stacks.

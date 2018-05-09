@@ -7,6 +7,9 @@ defmodule Zipcoder.Accounts.Student do
     field :first_name, :string
     field :gitusername, :string
     field :last_name, :string
+    field :labs_completed_percent, :integer, virtual: true, default: 0
+
+    has_many :lab_statuses, Zipcoder.Students.LabStatus, on_delete: :delete_all
 
     timestamps()
   end

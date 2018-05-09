@@ -14,7 +14,7 @@
 
   <body>
     <div>
-      <ul class="nav">
+      <ul class="nav justify-content-center">
         <li class="nav-item"><a class="nav-link" href="/students">Students</a></li>
         <li class="nav-item"><a class="nav-link" href="/students/new">Add Student</a></li>
         <li class="nav-item"><a class="nav-link" href="/labs">Labs</a></li>
@@ -25,11 +25,14 @@
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="main">
+      <main role="main container-fluid">
         <%= render @view_module, @view_template, assigns %>
       </main>
 
     </div> <!-- /container -->
+    <ul>
+
+    </ul>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

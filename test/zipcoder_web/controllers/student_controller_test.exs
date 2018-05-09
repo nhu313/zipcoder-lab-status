@@ -34,7 +34,7 @@ defmodule ZipcoderWeb.StudentControllerTest do
       assert redirected_to(conn) == student_path(conn, :show, id)
 
       conn = get conn, student_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show Student"
+      assert html_response(conn, 200) =~ @create_attrs.first_name
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -69,17 +69,17 @@ defmodule ZipcoderWeb.StudentControllerTest do
     end
   end
 
-  describe "delete student" do
-    setup [:create_student]
-
-    test "deletes chosen student", %{conn: conn, student: student} do
-      conn = delete conn, student_path(conn, :delete, student)
-      assert redirected_to(conn) == student_path(conn, :index)
-      assert_error_sent 404, fn ->
-        get conn, student_path(conn, :show, student)
-      end
-    end
-  end
+  # describe "delete student" do
+  #   setup [:create_student]
+  #
+  #   test "deletes chosen student", %{conn: conn, student: student} do
+  #     conn = delete conn, student_path(conn, :delete, student)
+  #     assert redirected_to(conn) == student_path(conn, :index)
+  #     assert_error_sent 404, fn ->
+  #       get conn, student_path(conn, :show, student)
+  #     end
+  #   end
+  # end
 
   defp create_student(_) do
     student = fixture(:student)

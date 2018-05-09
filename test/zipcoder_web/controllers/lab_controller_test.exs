@@ -15,7 +15,7 @@ defmodule ZipcoderWeb.LabControllerTest do
   describe "index" do
     test "lists all labs", %{conn: conn} do
       conn = get conn, lab_path(conn, :index)
-      assert html_response(conn, 200) =~ "Listing Labs"
+      assert html_response(conn, 200) =~ "Labs"
     end
   end
 
@@ -34,7 +34,7 @@ defmodule ZipcoderWeb.LabControllerTest do
       assert redirected_to(conn) == lab_path(conn, :show, id)
 
       conn = get conn, lab_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show Lab"
+      assert html_response(conn, 200) =~ "Completed"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -69,17 +69,6 @@ defmodule ZipcoderWeb.LabControllerTest do
     end
   end
 
-  describe "delete lab" do
-    setup [:create_lab]
-
-    test "deletes chosen lab", %{conn: conn, lab: lab} do
-      conn = delete conn, lab_path(conn, :delete, lab)
-      assert redirected_to(conn) == lab_path(conn, :index)
-      assert_error_sent 404, fn ->
-        get conn, lab_path(conn, :show, lab)
-      end
-    end
-  end
 
   defp create_lab(_) do
     lab = fixture(:lab)

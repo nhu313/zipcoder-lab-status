@@ -4,6 +4,7 @@ defmodule ZipcoderWeb.StudentController do
   alias Zipcoder.Accounts
   alias Zipcoder.Accounts.Student
   alias Zipcoder.Accounts.StudentService
+  alias Zipcoder.Labs
 
   def create_all(conn,  %{"file" => file}) do
     StudentService.create_all(file)
@@ -11,7 +12,7 @@ defmodule ZipcoderWeb.StudentController do
   end
 
   def index(conn, _params) do
-    students = Accounts.list_students()
+    students = Accounts.list_students_with_info()
     render(conn, "index.html", students: students)
   end
 
@@ -32,8 +33,8 @@ defmodule ZipcoderWeb.StudentController do
   end
 
   def show(conn, %{"id" => id}) do
-    student = Accounts.get_student!(id)
-    render(conn, "show.html", student: student)
+    student = Accounts.get_student_with_related_info!(id)
+    render(conn, "show.html", student: student, labs_without_pr: Labs.labs_without_pr(student))
   end
 
   def edit(conn, %{"id" => id}) do

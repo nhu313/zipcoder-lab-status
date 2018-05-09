@@ -7,6 +7,10 @@ defmodule Zipcoder.Labs do
   alias Zipcoder.Repo
 
   alias Zipcoder.Labs.Lab
+  alias Zipcoder.Students.LabStatus
+  alias Zipcoder.Accounts.Student
+  alias Zipcoder.Labs.Percent
+  alias Zipcoder.Accounts
 
   @doc """
   Returns the list of labs.
@@ -21,6 +25,32 @@ defmodule Zipcoder.Labs do
     Repo.all(Lab)
   end
 
+  def labs_with_students do
+    total_student_count = Accounts.count_students()
+
+    Lab
+    |> preload([lab], [:lab_statuses])
+    |> Repo.all()
+    |> Enum.map(&(add_students_completed_percent(&1, total_student_count)))
+  end
+
+  defp add_students_completed_percent(lab, 0), do: lab
+  defp add_students_completed_percent(lab, total_student_count) do
+    %{lab | percent_completed: (length(lab.lab_statuses)/total_student_count) * 100}
+  end
+
+  def count_labs do
+    Lab
+    |> select([lab], count(lab.id))
+    |> Repo.one()
+  end
+
+  def labs_without_pr(%Student{id: student_id}) do
+    Lab
+    |> join(:left, [lab], lab_status in LabStatus, lab.id == lab_status.lab_id and lab_status.student_id == ^student_id)
+    |> where([_, lab_status], is_nil(lab_status.id))
+    |> Repo.all
+  end
   @doc """
   Gets a single lab.
 
@@ -36,8 +66,22 @@ defmodule Zipcoder.Labs do
 
   """
   def get_lab!(id), do: Repo.get!(Lab, id)
+  def get_lab_with_students(id) do
+    Lab
+    |> where([lab], lab.id == ^id)
+    |> preload([lab], [lab_statuses: [:student]])
+    |> Repo.one
+  end
 
   def get_lab_by_repo_name(repo_name), do: Repo.get_by(Lab, repo_name: repo_name)
+
+
+  def students_without_pr_for_lab(%{id: lab_id}) do
+    Student
+    |> join(:left, [student], lab_status in LabStatus, lab_status.lab_id == ^lab_id and lab_status.student_id == student.id)
+    |> where([_, lab_status], is_nil(lab_status.id))
+    |> Repo.all
+  end
 
   @doc """
   Creates a lab.
