@@ -3,7 +3,6 @@ defmodule ZipcoderWeb.LabController do
 
   alias Zipcoder.Labs
   alias Zipcoder.Labs.Lab
-  alias Zipcoder.Labs.Percent
   alias Zipcoder.Labs.LabService
 
   def index(conn, _params) do
@@ -35,10 +34,11 @@ defmodule ZipcoderWeb.LabController do
   def show(conn, %{"id" => id}) do
     lab = Labs.get_lab_with_students(id)
     students_without_pr = Labs.students_without_pr_for_lab(lab)
-    total = length(lab.lab_statuses) + length(students_without_pr)
+    # so total would never be 0. don't judge my hackiness. it's a throwaway project
+    total = length(lab.lab_statuses) + length(students_without_pr) + 0.000001
     render(conn, "show.html", lab: lab,
                               students_without_pr: students_without_pr,
-                              percent_completed: Percent.create(length(lab.lab_statuses), total))
+                              percent_completed: length(lab.lab_statuses)/total)
   end
 
   def edit(conn, %{"id" => id}) do

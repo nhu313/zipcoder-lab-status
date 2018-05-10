@@ -10,32 +10,32 @@
   <%= @lab.order %>
 </div>
 <br />
-<br />
-<h4>Completed (<%= @percent_completed.percent %>%)</h4>
+<h4>Completed (<%= Formatter.percent(@percent_completed) %>)</h4>
 <div class="progress">
-  <div class="progress-bar bg-success" role="progressbar" style="width: <%= @percent_completed.percent %>%"></div>
+  <div class="progress-bar bg-success" role="progressbar" style="width: <%= Formatter.percent(@percent_completed) %>"></div>
 </div>
 <table class="table">
-  <thead>
+  <thead class="thead-light">
     <tr>
-      <td>Student</td>
-      <td>Link</td>
+      <th scope="col">Student</td>
+      <th scope="col">Link</td>
     </tr>
   </thead>
   <tbody>
     <%= for status <- @lab.lab_statuses do %>
       <tr>
-        <td><%= link Zipcoder.Formatter.student_name(status.student), to: student_path(@conn, :show, status.student) %></td>
+        <td><%= link Formatter.student_name(status.student), to: student_path(@conn, :show, status.student) %></td>
         <td><%= link "PR", to: status.url %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<h4>Not completed (<%= 100 - @percent_completed.percent %>%)</h4>
+<br />
+<h4>Not completed (<%= Formatter.inverse_percent(@percent_completed) %>)</h4>
+<hr />
 <ul>
   <%= for student <- @students_without_pr do %>
-    <li><%= link Zipcoder.Formatter.student_name(student), to: student_path(@conn, :show, student) %></li>
+    <li><%= link Formatter.student_name(student), to: student_path(@conn, :show, student) %></li>
   <% end %>
 </ul>
 <br/>

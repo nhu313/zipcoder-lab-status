@@ -16,7 +16,9 @@
       <td><%= link format_name(student), to: student_path(@conn, :show, student) %></td>
       <td>
         <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: <%= student.labs_completed_percent %>%"></div>
+          <div class="progress-bar bg-success" role="progressbar" style="width: <%= Formatter.percent(student.labs_completed_percent) %>">
+            <%= Formatter.percent(student.labs_completed_percent)%>
+          </div>
         </div>
       </td>
       <td><%= student.gitusername %></td>

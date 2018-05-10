@@ -2,17 +2,18 @@
   @<%= @student.gitusername %> <span><%= link "Edit", to: student_path(@conn, :edit, @student) %></span>
 
 <p></p>
-<h3>Labs Completed (<%= @student.labs_completed_percent %>%)</h3>
+<h3>Labs Completed (<%= Formatter.percent(@student.labs_completed_percent) %>)</h3>
 <div class="progress">
-  <div class="progress-bar bg-success" role="progressbar" style="width: <%= @student.labs_completed_percent %>%"></div>
+  <div class="progress-bar bg-success" role="progressbar" style="width: <%= Formatter.percent(@student.labs_completed_percent) %>">
+  </div>
 </div>
 <table class="table">
-  <thead>
+  <thead class="thead-light">
     <tr>
-      <td>Name</td>
-      <td>Status</td>
-      <td>Link</td>
-      <td>Actions</td>
+      <th scope="col">Name</td>
+      <th scope="col">Status</td>
+      <th scope="col">Link</td>
+      <th scope="col">Actions</td>
     </tr>
   </thead>
   <tbody>
@@ -29,12 +30,15 @@
   </tbody>
 </table>
 
-<h4>Not completed (<%= 100 - @student.labs_completed_percent %>%)</h4>
+<br />
+
+<h3>Not completed (<%= Formatter.inverse_percent(@student.labs_completed_percent) %>)</h3>
+<hr />
 <ul>
   <%= for lab <- @labs_without_pr do %>
     <li>
       <%= link lab.name, to: lab_path(@conn, :show, lab) %>
-      (<%= link "Repo", to: "https://git.zipcode.rocks/ZipCodeWilmington/" <> lab.name %>)
+      (<%= link "Repo", to: "https://git.zipcode.rocks/ZipCodeWilmington/" <> lab.repo_name %>)
     </li>
   <% end %>
 </ul>

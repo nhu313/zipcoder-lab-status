@@ -41,7 +41,7 @@ defmodule Zipcoder.Accounts do
   def add_labs_completed_percent(student, 0), do: student
 
   def add_labs_completed_percent(student, total_lab_count) do
-      %{student | labs_completed_percent: (length(student.lab_statuses)/total_lab_count) * 100}
+      %{student | labs_completed_percent: (length(student.lab_statuses)/total_lab_count)}
   end
 
   @doc """

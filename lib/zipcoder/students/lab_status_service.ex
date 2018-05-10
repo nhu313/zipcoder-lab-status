@@ -1,6 +1,5 @@
 defmodule Zipcoder.Students.LabStatusService do
   alias Zipcoder.Labs
-  alias Zipcoder.Labs.Lab
   alias Zipcoder.Accounts
   alias Zipcoder.Students
   alias Zipcoder.Accounts.Student

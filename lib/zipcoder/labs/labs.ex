@@ -9,7 +9,6 @@ defmodule Zipcoder.Labs do
   alias Zipcoder.Labs.Lab
   alias Zipcoder.Students.LabStatus
   alias Zipcoder.Accounts.Student
-  alias Zipcoder.Labs.Percent
   alias Zipcoder.Accounts
 
   @doc """
@@ -37,7 +36,7 @@ defmodule Zipcoder.Labs do
 
   defp add_students_completed_percent(lab, 0), do: lab
   defp add_students_completed_percent(lab, total_student_count) do
-    %{lab | percent_completed: (length(lab.lab_statuses)/total_student_count) * 100}
+    %{lab | percent_completed: (length(lab.lab_statuses)/total_student_count)}
   end
 
   def count_labs do

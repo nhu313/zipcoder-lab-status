@@ -40,6 +40,7 @@ defmodule ZipcoderWeb do
       import ZipcoderWeb.Router.Helpers
       import ZipcoderWeb.ErrorHelpers
       import ZipcoderWeb.Gettext
+      alias Zipcoder.Formatter
     end
   end
 

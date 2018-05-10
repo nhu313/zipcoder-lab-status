@@ -15,7 +15,9 @@
           <td><%= link lab.repo_name, to: "https://git.zipcode.rocks/ZipCodeWilmington/" <> lab.repo_name %></td>
           <td>
             <div class="progress">
-              <div class="progress-bar bg-success" role="progressbar" style="width: <%= lab.percent_completed %>%"></div>
+              <div class="progress-bar bg-success" role="progressbar" style="width: <%= Formatter.percent(lab.percent_completed) %>">
+                <%= Formatter.percent(lab.percent_completed) %>
+              </div>
             </div>
           </td>
           <td class="text-right">
