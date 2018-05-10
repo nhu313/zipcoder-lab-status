@@ -1,8 +1,14 @@
 <h2><%= @lab.name %></h2>
-<strong>Repo name:</strong>
-<%= @lab.repo_name %>
-(<%= link "Repo", to: "https://git.zipcode.rocks/ZipCodeWilmington/" <> @lab.name %>)
-<%= link "Edit", to: lab_path(@conn, :edit, @lab), class: "btn btn-success btn-xs" %>
+<%= link "Edit", to: lab_path(@conn, :edit, @lab) %>
+<div>
+  <strong>Repo name:</strong>
+  <%= @lab.repo_name %>
+  (<%= link "Repo", to: "https://git.zipcode.rocks/ZipCodeWilmington/" <> @lab.name %>)
+</div>
+<div>
+  <strong>Order:</strong>
+  <%= @lab.order %>
+</div>
 <br />
 <br />
 <h4>Completed (<%= @percent_completed.percent %>%)</h4>
@@ -32,8 +38,6 @@
     <li><%= link Zipcoder.Formatter.student_name(student), to: student_path(@conn, :show, student) %></li>
   <% end %>
 </ul>
-
-
-
+<br/>
 <span><%= link "Back", to: lab_path(@conn, :index), class: "btn btn-info btn-xs"%></span>
 <span><%= link "Delete", to: lab_path(@conn, :delete, @lab), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>

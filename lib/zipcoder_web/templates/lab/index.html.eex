@@ -1,9 +1,4 @@
 <h2>Labs</h2>
-<%= form_for @conn, student_path(@conn, :create_all), [multipart: true], fn f -> %>
-  <p>Upload multiple labs from csv file (Upload with header: )</p>
-  <%= file_input f, :file %>
-  <%= submit "Submit" %>
-<% end %>
 <table class="table">
   <thead>
     <tr>
@@ -32,4 +27,17 @@
   </tbody>
 </table>
 
-<span><%= link "New Lab", to: lab_path(@conn, :new) %></span>
+<span><%= link "New Lab", to: lab_path(@conn, :new), class: "btn btn-primary" %></span>
+<p></p>
+<div class="card" style="max-width: 800px;">
+  <div class="card-body">
+    <h4 class="card-title">
+      Upload Labs
+    </h4>
+    <%= form_for @conn, "/labs/create_all", [multipart: true], fn f -> %>
+      <p>Upload multiple labs from csv file (Upload with header: Lab Name, Repo Name (no link), Order)</p>
+      <%= file_input f, :file %>
+      <%= submit "Submit" %>
+    <% end %>
+  </div>
+</div>

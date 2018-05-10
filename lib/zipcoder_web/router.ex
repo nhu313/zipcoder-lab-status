@@ -21,6 +21,7 @@ defmodule ZipcoderWeb.Router do
     post "/students/create_all", StudentController, :create_all
     resources "/students", StudentController
 
+    post "/labs/create_all", LabController, :create_all
     resources "/labs/status_logs", StatusLogsController
     resources "/labs", LabController
     resources "/lab_statuses", StatusController

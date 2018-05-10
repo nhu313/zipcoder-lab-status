@@ -30,6 +30,7 @@ defmodule Zipcoder.Labs do
 
     Lab
     |> preload([lab], [:lab_statuses])
+    |> order_by([lab], asc: lab.order, asc: lab.inserted_at)
     |> Repo.all()
     |> Enum.map(&(add_students_completed_percent(&1, total_student_count)))
   end

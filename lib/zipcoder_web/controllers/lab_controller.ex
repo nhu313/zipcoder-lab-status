@@ -10,6 +10,10 @@ defmodule ZipcoderWeb.LabController do
     render(conn, "index.html", labs: labs)
   end
 
+  def create_all(conn, params) do
+
+  end
+
   def new(conn, _params) do
     changeset = Labs.change_lab(%Lab{})
     render(conn, "new.html", changeset: changeset)

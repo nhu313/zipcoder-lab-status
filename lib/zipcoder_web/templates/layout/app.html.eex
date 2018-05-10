@@ -19,8 +19,6 @@
         <li class="nav-item"><a class="nav-link" href="/students/new">Add Student</a></li>
         <li class="nav-item"><a class="nav-link" href="/labs">Labs</a></li>
         <li class="nav-item"><a class="nav-link" href="/labs/new">Add Lab</a></li>
-        <li class="nav-item"><a class="nav-link" href="/lab_statuses">Statuses</a></li>
-        <li class="nav-item"><a class="nav-link" href="/lab_statuses/new">Add PR Status</a></li>
       </ul>
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
@@ -30,9 +28,14 @@
       </main>
 
     </div> <!-- /container -->
-    <ul>
-
-    </ul>
+    <footer>
+      <ul class="nav justify-content-center">
+        <li class="nav-item"><a class="nav-link" href="/students/lab_statuses">Lab Statuses</a></li>
+        <li class="nav-item"><a class="nav-link" href="/students/lab_statuses/new">Add Lab Status</a></li>
+        <li class="nav-item"><a class="nav-link" href="/lab_statuses">Status Types</a></li>
+        <li class="nav-item"><a class="nav-link" href="/lab_statuses/new">Add Status Types</a></li>
+      </ul>
+    </footer>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
