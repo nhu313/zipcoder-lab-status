@@ -4,14 +4,16 @@ defmodule ZipcoderWeb.LabController do
   alias Zipcoder.Labs
   alias Zipcoder.Labs.Lab
   alias Zipcoder.Labs.Percent
+  alias Zipcoder.Labs.LabService
 
   def index(conn, _params) do
     labs = Labs.labs_with_students()
     render(conn, "index.html", labs: labs)
   end
 
-  def create_all(conn, params) do
-
+  def create_all(conn,  %{"file" => file}) do
+    LabService.create_from_file(file)
+    redirect(conn, to: lab_path(conn, :index))
   end
 
   def new(conn, _params) do

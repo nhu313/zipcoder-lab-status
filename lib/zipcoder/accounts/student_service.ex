@@ -1,20 +1,8 @@
 defmodule Zipcoder.Accounts.StudentService do
   alias Zipcoder.Accounts
 
-  def create_all(file) do
-    file
-    |> parse_file
-    |> Enum.map(&Accounts.create_student/1)
-  end
-
-  def parse_file(file) do
-    file.path
-    |> File.stream!
-    |> CSV.decode
-    |> Stream.drop(1)
-    |> Stream.map(&to_student/1)
-    |> Stream.reject(&(&1 == nil))
-    |> Enum.to_list()
+  def create_from_file(file) do
+    Zipcoder.FileToDb.create_from_file(file, &to_student/1, &Accounts.create_student/1)
   end
 
   defp to_student({:ok, ["" | _]}) do

@@ -12,7 +12,7 @@
     <%= for lab <- @labs do %>
         <tr>
           <td><%= link lab.name, to: lab_path(@conn, :show, lab) %></td>
-          <td><%= lab.repo_name %></td>
+          <td><%= link lab.repo_name, to: "https://git.zipcode.rocks/ZipCodeWilmington/" <> lab.repo_name %></td>
           <td>
             <div class="progress">
               <div class="progress-bar bg-success" role="progressbar" style="width: <%= lab.percent_completed %>%"></div>

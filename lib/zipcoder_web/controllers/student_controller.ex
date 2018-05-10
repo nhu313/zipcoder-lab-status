@@ -7,7 +7,7 @@ defmodule ZipcoderWeb.StudentController do
   alias Zipcoder.Labs
 
   def create_all(conn,  %{"file" => file}) do
-    StudentService.create_all(file)
+    StudentService.create_from_file(file)
     redirect(conn, to: student_path(conn, :index))
   end
 
