@@ -34,6 +34,7 @@
         <li class="nav-item"><a class="nav-link" href="/students/lab_statuses/new">Add Lab Status</a></li>
         <li class="nav-item"><a class="nav-link" href="/lab_statuses">Status Types</a></li>
         <li class="nav-item"><a class="nav-link" href="/lab_statuses/new">Add Status Types</a></li>
+        <li class="nav-item"><a class="nav-link" href="/labs/status_logs">Gitea Logs</a></li>
       </ul>
     </footer>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

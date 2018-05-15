@@ -16,7 +16,7 @@ defmodule ZipcoderWeb.Router do
   scope "/", ZipcoderWeb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", StudentController, :index
     resources "/students/lab_statuses", LabStatusController
     post "/students/create_all", StudentController, :create_all
     resources "/students", StudentController
