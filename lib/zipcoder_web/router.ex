@@ -7,6 +7,7 @@ defmodule ZipcoderWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug BasicAuth, username: System.get_env("ZIPCODER_USER"), password: System.get_env("ZIPCODER_PW")
   end
 
   pipeline :api do
