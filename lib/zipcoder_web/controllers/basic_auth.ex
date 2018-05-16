@@ -19,7 +19,6 @@ defmodule BasicAuth do
   end
 
   defp encode(username, password) do
-    IO.puts "username #{username} password #{password}"
     Base.encode64(username <> ":" <> password)
   end
 
