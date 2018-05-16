@@ -32,8 +32,8 @@
       <ul class="nav justify-content-center">
         <li class="nav-item"><a class="nav-link" href="/students/lab_statuses">Lab Statuses</a></li>
         <li class="nav-item"><a class="nav-link" href="/students/lab_statuses/new">Add Lab Status</a></li>
-        <li class="nav-item"><a class="nav-link" href="/lab_statuses">Status Types</a></li>
-        <li class="nav-item"><a class="nav-link" href="/lab_statuses/new">Add Status Types</a></li>
+        <li class="nav-item"><a class="nav-link" href="/lab_statuses">PR Status Types</a></li>
+        <li class="nav-item"><a class="nav-link" href="/lab_statuses/new">Add PR Status Types</a></li>
         <li class="nav-item"><a class="nav-link" href="/labs/status_logs">Gitea Logs</a></li>
       </ul>
     </footer>
