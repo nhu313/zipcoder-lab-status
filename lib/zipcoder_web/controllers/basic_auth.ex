@@ -18,9 +18,7 @@ defmodule BasicAuth do
     end
   end
 
-  defp encode(username, password) do
-    Base.encode64(username <> ":" <> password)
-  end
+  defp encode(username, password), do: Base.encode64(username <> ":" <> password)
 
   defp unauthorized(conn) do
     conn
