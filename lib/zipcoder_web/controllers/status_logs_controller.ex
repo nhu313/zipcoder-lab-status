@@ -3,6 +3,7 @@ defmodule ZipcoderWeb.StatusLogsController do
 
   alias Zipcoder.Labs
   alias Zipcoder.Labs.StatusLogs
+  alias Zipcoder.Students.LabStatusService
 
   def index(conn, _params) do
     status_logs = Labs.list_status_logs()
@@ -12,6 +13,12 @@ defmodule ZipcoderWeb.StatusLogsController do
   def new(conn, _params) do
     changeset = Labs.change_status_logs(%StatusLogs{})
     render(conn, "new.html", changeset: changeset)
+  end
+
+  def process(conn, %{"id" => id}) do
+    status_log = Labs.get_status_logs!(id)
+    {:ok, status} = LabStatusService.create(Poison.decode!(status_log.message))
+    redirect(conn, to: student_path(conn, :show, status.student_id))
   end
 
   def create(conn, %{"status_logs" => status_logs_params}) do

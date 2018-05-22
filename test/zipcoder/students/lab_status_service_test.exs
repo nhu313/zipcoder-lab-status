@@ -22,6 +22,9 @@ defmodule Zipcoder.Students.LabStatusServiceTest do
       assert lab_status.lab_id == lab.id
       assert lab_status.status_id == status.id
       assert lab_status.student_id == student.id
+
+      [log] = Labs.list_status_logs
+      assert log.lab_status_id
     end
 
     test "create log without status" do

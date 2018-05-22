@@ -1,8 +1,9 @@
-<h2>Students</h2>
+<h2>Students (<%= length(@students) %>)</h2>
 
 <table class="table">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Name</th>
       <th>Lab progress</th>
       <th>Git username</th>
@@ -13,7 +14,8 @@
   <tbody>
 <%= for student <- @students do %>
     <tr>
-      <td><%= link format_name(student), to: student_path(@conn, :show, student) %></td>
+      <td><%= student.id %></td>
+      <td> <%= link format_name(student), to: student_path(@conn, :show, student) %></td>
       <td>
         <div class="progress">
           <div class="progress-bar bg-success" role="progressbar" style="width: <%= Formatter.percent(student.labs_completed_percent) %>">

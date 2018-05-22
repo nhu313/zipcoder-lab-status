@@ -5,6 +5,8 @@
     <tr>
       <th>Created</th>
       <th>Message</th>
+      <th>Process</th>
+
       <th></th>
     </tr>
   </thead>
@@ -13,9 +15,15 @@
     <tr>
       <td><%= status_logs.inserted_at %></td>
       <td><textarea cols=50 rows=5><%= status_logs.message %></textarea></td>
-
+      <td>
+        <%= if status_logs.lab_status_id do %>
+          <span><%= link "Show process log", to: "/lab_statuses/#{status_logs.lab_status_id}", class: "btn btn-default btn-xs" %></span>
+        <% else %>
+          <%= link "Process", to: status_logs_path(@conn, :process, status_logs), method: :post, class: "btn btn-success btn-xs" %>
+        <% end %>
+      </td>
       <td class="text-right">
-        <span><%= link "Show", to: status_logs.url, class: "btn btn-default btn-xs", target: "_blank" %></span>
+        <span><%= link "Show PR", to: status_logs.url, class: "btn btn-default btn-xs", target: "_blank" %></span>
         <span><%= link "Delete", to: status_logs_path(@conn, :delete, status_logs), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>

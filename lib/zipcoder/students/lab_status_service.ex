@@ -21,11 +21,12 @@ defmodule Zipcoder.Students.LabStatusService do
     result
   end
 
-  defp log({:ok, message}, url, {:ok, %Student{id: lab_status_id}}) do
+  defp log({:ok, message}, url, {:ok, %Zipcoder.Students.LabStatus{id: lab_status_id}}) do
     Labs.create_status_logs(%{message: message, lab_status_id: lab_status_id, url: url})
   end
 
-  defp log({:ok, message}, url, _) do
+  defp log({:ok, message}, url, something) do
+    IO.inspect something
     Labs.create_status_logs(%{message: message, url: url})
   end
 
