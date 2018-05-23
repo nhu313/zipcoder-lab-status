@@ -42,7 +42,7 @@
   <%= for student <- @students_without_pr do %>
     <li>
       <%= link Formatter.student_name(student), to: student_path(@conn, :show, student) %>
-      (<%= status.student.gitusername %>)
+      (<%= student.gitusername %>)
     </li>
   <% end %>
 </ul>
