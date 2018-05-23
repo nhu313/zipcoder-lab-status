@@ -9,7 +9,7 @@ defmodule Zipcoder.Students.LabStatusService do
     IO.inspect Accounts.get_student_by_gitusername(parsed_json.username)
     IO.inspect Labs.get_lab_by_repo_name(parsed_json.repo_name)
     IO.inspect Labs.get_status_by_name(parsed_json.action)
-    result = with %{id: student_id} <- Accounts.get_student_by_gitusername(parsed_json.username),
+    result = with %{id: student_id} <- Accounts.get_student_by_gitusername(String.downcase(parsed_json.username)),
                   %{id: lab_id} <- Labs.get_lab_by_repo_name(parsed_json.repo_name),
                   %{id: status_id} <- Labs.get_status_by_name(parsed_json.action),
                    do: Students.create_lab_status(%{

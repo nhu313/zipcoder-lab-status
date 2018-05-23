@@ -17,7 +17,7 @@ defmodule ZipcoderWeb.StatusLogsController do
 
   def process(conn, %{"id" => id}) do
     status_log = Labs.get_status_logs!(id)
-    case LabStatusService.create(Poison.decode!(status_log.message)) do
+    case LabStatusService.create(status_log.message) do
       {:ok, status} ->
         redirect(conn, to: student_path(conn, :show, status.student_id))
       _ ->
