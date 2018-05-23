@@ -32,7 +32,7 @@ defmodule Zipcoder.Students.LabStatusServiceTest do
       LabStatusService.create(file)
 
       [log] = Labs.list_status_logs
-      assert log.message =~ "Lab-ZipcoderStore-HashMap"
+      assert log.message["pull_request"]
     end
 
     test "parse file" do

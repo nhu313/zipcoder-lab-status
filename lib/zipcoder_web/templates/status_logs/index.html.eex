@@ -14,7 +14,7 @@
 <%= for status_logs <- @status_logs do %>
     <tr>
       <td><%= status_logs.inserted_at %></td>
-      <td><textarea cols=50 rows=5><%= status_logs.message %></textarea></td>
+      <td><textarea cols=50 rows=5><%= message_str(status_logs) %></textarea></td>
       <td>
         <%= if status_logs.lab_status_id do %>
           <span><%= link "Show process log", to: "/students/lab_statuses/#{status_logs.lab_status_id}", class: "btn btn-default btn-xs" %></span>

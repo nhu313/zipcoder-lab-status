@@ -14,6 +14,7 @@
           <td><%= link lab.name, to: lab_path(@conn, :show, lab) %></td>
           <td><%= link lab.repo_name, to: "https://git.zipcode.rocks/ZipCodeWilmington/" <> lab.repo_name %></td>
           <td>
+            <%= length(lab.lab_statuses) %> Completed
             <div class="progress">
               <div class="progress-bar bg-success" role="progressbar" style="width: <%= Formatter.percent(lab.percent_completed) %>">
                 <%= Formatter.percent(lab.percent_completed) %>

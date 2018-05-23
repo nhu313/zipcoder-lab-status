@@ -4,7 +4,7 @@ defmodule Zipcoder.Labs.StatusLogs do
 
 
   schema "status_logs" do
-    field :message, :string
+    field :message, :map
     field :lab_status_id, :integer
     field :url, :string
 

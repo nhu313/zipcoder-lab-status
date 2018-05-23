@@ -3,7 +3,7 @@ defmodule Zipcoder.Repo.Migrations.CreateStatusLogs do
 
   def up do
     create table(:status_logs) do
-      add :message, :string, size: 7000
+      add :message, :map
       add :lab_status_id, :integer
       add :url, :string
 

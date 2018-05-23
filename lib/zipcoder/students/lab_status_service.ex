@@ -6,6 +6,9 @@ defmodule Zipcoder.Students.LabStatusService do
 
   def create(json) do
     parsed_json = parse_json(json)
+    IO.inspect Accounts.get_student_by_gitusername(parsed_json.username)
+    IO.inspect Labs.get_lab_by_repo_name(parsed_json.repo_name)
+    IO.inspect Labs.get_status_by_name(parsed_json.action)
     result = with %{id: student_id} <- Accounts.get_student_by_gitusername(parsed_json.username),
                   %{id: lab_id} <- Labs.get_lab_by_repo_name(parsed_json.repo_name),
                   %{id: status_id} <- Labs.get_status_by_name(parsed_json.action),
@@ -16,17 +19,17 @@ defmodule Zipcoder.Students.LabStatusService do
                                                     url: parsed_json.url
                                                   })
 
-    log(Poison.encode(json), parsed_json.url, result)
+    log(json, parsed_json.url, result)
 
     result
   end
 
-  defp log({:ok, message}, url, {:ok, %Zipcoder.Students.LabStatus{id: lab_status_id}}) do
+  defp log(message, url, {:ok, %Zipcoder.Students.LabStatus{id: lab_status_id}}) do
     Labs.create_status_logs(%{message: message, lab_status_id: lab_status_id, url: url})
   end
 
-  defp log({:ok, message}, url, something) do
-    IO.inspect something
+  defp log(message, url, status) do
+    IO.inspect status
     Labs.create_status_logs(%{message: message, url: url})
   end
 
