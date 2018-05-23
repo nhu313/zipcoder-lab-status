@@ -26,7 +26,10 @@
   <tbody>
     <%= for status <- @lab.lab_statuses do %>
       <tr>
-        <td><%= link Formatter.student_name(status.student), to: student_path(@conn, :show, status.student) %></td>
+        <td>
+          <%= link Formatter.student_name(status.student), to: student_path(@conn, :show, status.student) %>
+          (<%= status.student.gitusername %>)
+        </td>
         <td><%= link "PR", to: status.url %></td>
       </tr>
     <% end %>
@@ -37,7 +40,10 @@
 <hr />
 <ul>
   <%= for student <- @students_without_pr do %>
-    <li><%= link Formatter.student_name(student), to: student_path(@conn, :show, student) %></li>
+    <li>
+      <%= link Formatter.student_name(student), to: student_path(@conn, :show, student) %>
+      (<%= status.student.gitusername %>)
+    </li>
   <% end %>
 </ul>
 <br/>
