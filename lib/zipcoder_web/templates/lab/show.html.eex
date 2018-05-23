@@ -1,4 +1,4 @@
-<h2><%= @lab.name %></h2>
+<h2><%= @lab.id %> - <%= @lab.name %></h2>
 <%= link "Edit", to: lab_path(@conn, :edit, @lab) %>
 <div>
   <strong>Repo name:</strong>
