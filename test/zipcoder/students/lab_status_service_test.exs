@@ -15,7 +15,7 @@ defmodule Zipcoder.Students.LabStatusServiceTest do
 
       file = read_file()
 
-      LabStatusService.create(file)
+      LabStatusService.create_and_log(file)
 
       [lab_status] = Students.list_student_lab_statuses()
 
@@ -27,9 +27,22 @@ defmodule Zipcoder.Students.LabStatusServiceTest do
       assert log.lab_status_id
     end
 
+    test "does not create lab status if one already exist" do
+      {:ok, student} = Accounts.create_student(%{first_name: "nhu", last_name: "NN", gitusername: "nhu313"})
+      {:ok, status} = Labs.create_status(%{name: "opened"})
+      {:ok, lab} = Labs.create_lab(%{name: "hash", repo_name: "Lab-ZipcoderStore-HashMap"})
+
+      Students.create_lab_status(%{lab_id: lab.id, student_id: student.id, status_id: status.id})
+
+      file = read_file()
+      LabStatusService.create_and_log(file)
+
+      assert length(Students.list_student_lab_statuses()) == 1
+    end
+
     test "create log without status" do
       file = read_file()
-      LabStatusService.create(file)
+      LabStatusService.create_and_log(file)
 
       [log] = Labs.list_status_logs
       assert log.message["pull_request"]

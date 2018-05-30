@@ -36,7 +36,7 @@
   </tbody>
 </table>
 <br />
-<h4>Not completed (<%= Formatter.inverse_percent(@percent_completed) %> - <%= 38 - length(@lab.lab_statuses) %>)</h4>
+<h4>Not completed (<%= Formatter.inverse_percent(@percent_completed) %> - <%= length(@students_without_pr) %>)</h4>
 <hr />
 <ul>
   <%= for student <- @students_without_pr do %>
