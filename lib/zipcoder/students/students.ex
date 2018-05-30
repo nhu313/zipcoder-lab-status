@@ -18,7 +18,9 @@ defmodule Zipcoder.Students do
 
   """
   def list_student_lab_statuses do
-    Repo.all(LabStatus)
+    LabStatus
+    |> order_by([s], asc: s.student_id, asc: s.lab_id)
+    |> Repo.all()
   end
 
   @doc """

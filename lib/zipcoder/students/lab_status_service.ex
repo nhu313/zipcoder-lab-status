@@ -6,7 +6,7 @@ defmodule Zipcoder.Students.LabStatusService do
 
   def create(json) do
     parsed_json = parse_json(json)
-    IO.inspect Accounts.get_student_by_gitusername(parsed_json.username)
+    IO.inspect Accounts.get_student_by_gitusername(String.downcase(parsed_json.username))
     IO.inspect Labs.get_lab_by_repo_name(parsed_json.repo_name)
     IO.inspect Labs.get_status_by_name(parsed_json.action)
     result = with %{id: student_id} <- Accounts.get_student_by_gitusername(String.downcase(parsed_json.username)),
@@ -29,6 +29,7 @@ defmodule Zipcoder.Students.LabStatusService do
   end
 
   defp log(message, url, status) do
+    IO.puts "******* status is"
     IO.inspect status
     Labs.create_status_logs(%{message: message, url: url})
   end
