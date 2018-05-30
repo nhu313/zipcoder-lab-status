@@ -103,4 +103,10 @@ defmodule Zipcoder.Students do
   def change_lab_status(%LabStatus{} = lab_status) do
     LabStatus.changeset(lab_status, %{})
   end
+
+  def find_lab_status(student_id, lab_id, status_id) do
+    LabStatus
+    |> where(student_id: ^student_id, lab_id: ^lab_id, status_id: ^status_id)
+    |> Repo.one()
+  end
 end

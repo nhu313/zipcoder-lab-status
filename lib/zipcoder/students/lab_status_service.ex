@@ -4,6 +4,13 @@ defmodule Zipcoder.Students.LabStatusService do
   alias Zipcoder.Students
   alias Zipcoder.Accounts.Student
 
+  def create_and_log(json) do
+    result = create(json)
+    log(json, result)
+
+    result
+  end
+
   def create(json) do
     parsed_json = parse_json(json)
     IO.inspect Accounts.get_student_by_gitusername(String.downcase(parsed_json.username))
@@ -12,26 +19,33 @@ defmodule Zipcoder.Students.LabStatusService do
     result = with %{id: student_id} <- Accounts.get_student_by_gitusername(String.downcase(parsed_json.username)),
                   %{id: lab_id} <- Labs.get_lab_by_repo_name(parsed_json.repo_name),
                   %{id: status_id} <- Labs.get_status_by_name(parsed_json.action),
-                   do: Students.create_lab_status(%{
-                                                    lab_id: lab_id,
-                                                    student_id: student_id,
-                                                    status_id: status_id,
-                                                    url: parsed_json.url
-                                                  })
-
-    log(json, parsed_json.url, result)
+                   do: create_lab_status(student_id, lab_id, status_id, parsed_json.url)
 
     result
   end
 
-  defp log(message, url, {:ok, %Zipcoder.Students.LabStatus{id: lab_status_id}}) do
+  defp create_lab_status(student_id, lab_id, status_id, url) do
+    status = Students.find_lab_status(student_id, lab_id, status_id)
+    if status do
+      status
+    else
+      Students.create_lab_status(%{
+                                   lab_id: lab_id,
+                                   student_id: student_id,
+                                   status_id: status_id,
+                                   url: url
+                                 })
+    end
+  end
+
+  defp log(message, {:ok, %Zipcoder.Students.LabStatus{id: lab_status_id, url: url}}) do
     Labs.create_status_logs(%{message: message, lab_status_id: lab_status_id, url: url})
   end
 
-  defp log(message, url, status) do
+  defp log(message, status) do
     IO.puts "******* status is"
     IO.inspect status
-    Labs.create_status_logs(%{message: message, url: url})
+    Labs.create_status_logs(%{message: message})
   end
 
   def parse_json(json) do
