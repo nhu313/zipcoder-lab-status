@@ -23,7 +23,7 @@
         <% end %>
       </td>
       <td class="text-right">
-        <span><%= link "Show PR", to: status_logs.url, class: "btn btn-default btn-xs", target: "_blank" %></span>
+        <span><%= link "Show PR", to: (status_logs.url || ""), class: "btn btn-default btn-xs", target: "_blank" %></span>
         <span><%= link "Delete", to: status_logs_path(@conn, :delete, status_logs), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
