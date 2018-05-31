@@ -19,8 +19,9 @@
 <table class="table">
   <thead class="thead-light">
     <tr>
-      <th scope="col">Student</td>
-      <th scope="col">Link</td>
+      <th scope="col">Student</th>
+      <th scope="col">Link</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -31,6 +32,9 @@
           (<%= status.student.gitusername %>)
         </td>
         <td><%= link "PR", to: status.url %></td>
+        <td>
+          <%= link "Delete", to: lab_status_path(@conn, :delete, status), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -38,14 +42,28 @@
 <br />
 <h4>Not completed (<%= Formatter.inverse_percent(@percent_completed) %> - <%= length(@students_without_pr) %>)</h4>
 <hr />
-<ul>
-  <%= for student <- @students_without_pr do %>
-    <li>
-      <%= link Formatter.student_name(student), to: student_path(@conn, :show, student) %>
-      (<%= student.gitusername %>)
-    </li>
-  <% end %>
-</ul>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Student</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for student <- @students_without_pr do %>
+      <tr>
+        <td>
+          <%= link Formatter.student_name(student), to: student_path(@conn, :show, student) %>
+          (<%= student.gitusername %>)
+        </td>
+        <td>
+          <%= link "New lab status", to: lab_status_path(@conn, :new, student_id: student.id, lab_id: @lab.id),
+              class: "btn btn-success btn-xs" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <br/>
 <span><%= link "Back", to: lab_path(@conn, :index), class: "btn btn-info btn-xs"%></span>
 <span><%= link "Delete", to: lab_path(@conn, :delete, @lab), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>

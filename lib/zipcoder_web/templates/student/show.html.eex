@@ -21,7 +21,7 @@
       <tr>
         <td><%= link status.lab.name, to: lab_path(@conn, :show, status.lab) %></td>
         <td><%= status.status.name %></td>
-        <td><%= link "PR", to: status.url %></td>
+        <td><%= link "PR", to: (status.url || "") %></td>
         <td>
           <%= link "Delete", to: lab_status_path(@conn, :delete, status), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
         </td>

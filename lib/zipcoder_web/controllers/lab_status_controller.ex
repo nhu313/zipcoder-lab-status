@@ -15,8 +15,10 @@ defmodule ZipcoderWeb.LabStatusController do
     render(conn, "index.html", student_lab_statuses: student_lab_statuses)
   end
 
-  def new(conn, _params) do
-    changeset = Students.change_lab_status(%LabStatus{})
+  def new(conn, params) do
+    changeset = Students.change_lab_status(%LabStatus{student_id: params["student_id"],
+                                                      lab_id: params["lab_id"],
+                                                      status_id: 1})
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -25,7 +27,7 @@ defmodule ZipcoderWeb.LabStatusController do
       {:ok, lab_status} ->
         conn
         |> put_flash(:info, "Lab status created successfully.")
-        |> redirect(to: lab_status_path(conn, :show, lab_status))
+        |> redirect(to: student_path(conn, :show, lab_status.student_id))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -61,6 +63,6 @@ defmodule ZipcoderWeb.LabStatusController do
 
     conn
     |> put_flash(:info, "Lab status deleted successfully.")
-    |> redirect(to: lab_status_path(conn, :index))
+    |> redirect(to: student_path(conn, :show, lab_status.student_id))
   end
 end
