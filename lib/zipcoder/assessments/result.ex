@@ -7,6 +7,7 @@ defmodule Zipcoder.Assessments.Result do
     field :assessment_id, :integer
     field :score, :integer
     field :student_id, :integer
+    field :notes, :string
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule Zipcoder.Assessments.Result do
   @doc false
   def changeset(result, attrs) do
     result
-    |> cast(attrs, [:assessment_id, :student_id, :score])
+    |> cast(attrs, [:assessment_id, :student_id, :score, :notes])
     |> validate_required([:assessment_id, :student_id, :score])
   end
 end

@@ -6,6 +6,7 @@ defmodule Zipcoder.Repo.Migrations.CreateAssessmentResults do
       add :assessment_id, :integer
       add :student_id, :integer
       add :score, :integer
+      add :notes, :string, size: 3000
 
       timestamps()
     end
