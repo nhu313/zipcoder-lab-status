@@ -1,0 +1,23 @@
+<h2>Show Result</h2>
+
+<ul>
+
+  <li>
+    <strong>Assessment:</strong>
+    <%= @result.assessment_id %>
+  </li>
+
+  <li>
+    <strong>Student:</strong>
+    <%= @result.student_id %>
+  </li>
+
+  <li>
+    <strong>Score:</strong>
+    <%= @result.score %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: result_path(@conn, :edit, @result) %></span>
+<span><%= link "Back", to: result_path(@conn, :index) %></span>

@@ -68,4 +68,68 @@ defmodule Zipcoder.AssessmentsTest do
       assert %Ecto.Changeset{} = Assessments.change_assessment(assessment)
     end
   end
+
+  describe "assessment_results" do
+    alias Zipcoder.Assessments.Result
+
+    @valid_attrs %{assessment_id: 42, score: 42, student_id: 42}
+    @update_attrs %{assessment_id: 43, score: 43, student_id: 43}
+    @invalid_attrs %{assessment_id: nil, score: nil, student_id: nil}
+
+    def result_fixture(attrs \\ %{}) do
+      {:ok, result} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Assessments.create_result()
+
+      result
+    end
+
+    test "list_assessment_results/0 returns all assessment_results" do
+      result = result_fixture()
+      assert Assessments.list_assessment_results() == [result]
+    end
+
+    test "get_result!/1 returns the result with given id" do
+      result = result_fixture()
+      assert Assessments.get_result!(result.id) == result
+    end
+
+    test "create_result/1 with valid data creates a result" do
+      assert {:ok, %Result{} = result} = Assessments.create_result(@valid_attrs)
+      assert result.assessment_id == 42
+      assert result.score == 42
+      assert result.student_id == 42
+    end
+
+    test "create_result/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Assessments.create_result(@invalid_attrs)
+    end
+
+    test "update_result/2 with valid data updates the result" do
+      result = result_fixture()
+      assert {:ok, result} = Assessments.update_result(result, @update_attrs)
+      assert %Result{} = result
+      assert result.assessment_id == 43
+      assert result.score == 43
+      assert result.student_id == 43
+    end
+
+    test "update_result/2 with invalid data returns error changeset" do
+      result = result_fixture()
+      assert {:error, %Ecto.Changeset{}} = Assessments.update_result(result, @invalid_attrs)
+      assert result == Assessments.get_result!(result.id)
+    end
+
+    test "delete_result/1 deletes the result" do
+      result = result_fixture()
+      assert {:ok, %Result{}} = Assessments.delete_result(result)
+      assert_raise Ecto.NoResultsError, fn -> Assessments.get_result!(result.id) end
+    end
+
+    test "change_result/1 returns a result changeset" do
+      result = result_fixture()
+      assert %Ecto.Changeset{} = Assessments.change_result(result)
+    end
+  end
 end

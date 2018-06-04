@@ -1,0 +1,30 @@
+<h2>Listing Assessment results</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Assessment</th>
+      <th>Student</th>
+      <th>Score</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for result <- @assessment_results do %>
+    <tr>
+      <td><%= result.assessment_id %></td>
+      <td><%= result.student_id %></td>
+      <td><%= result.score %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: result_path(@conn, :show, result), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: result_path(@conn, :edit, result), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: result_path(@conn, :delete, result), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Result", to: result_path(@conn, :new) %></span>
