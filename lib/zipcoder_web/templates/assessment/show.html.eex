@@ -26,3 +26,55 @@
 
 <span><%= link "Edit", to: assessment_path(@conn, :edit, @assessment) %></span>
 <span><%= link "Back", to: assessment_path(@conn, :index) %></span>
+
+
+<h4>Completed (<%= Formatter.percent(@percent_completed) %> - <%= length(@assessment.results) %>)</h4>
+<div class="progress">
+  <div class="progress-bar bg-success" role="progressbar" style="width: <%= Formatter.percent(@percent_completed) %>">
+    <%= Formatter.percent(@percent_completed) %>
+  </div>
+</div>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Student</th>
+      <th scope="col">Score</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for result <- @assessment.results do %>
+      <tr>
+        <td>
+          <%= link Formatter.student_name(result.student), to: student_path(@conn, :show, result.student) %>
+          (<%= result.student.gitusername %>)
+        </td>
+        <td><%= result.score %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Student</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for student <- @students_without_result do %>
+      <tr>
+        <td>
+          <%= link Formatter.student_name(student), to: student_path(@conn, :show, student) %>
+          (<%= student.gitusername %>)
+        </td>
+        <td>
+          <%= link "Add result", to: result_path(@conn, :new, student_id: student.id, assessment_id: @assessment.id),
+                      class: "btn btn-success btn-xs" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />

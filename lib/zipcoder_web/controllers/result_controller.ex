@@ -9,9 +9,19 @@ defmodule ZipcoderWeb.ResultController do
     render(conn, "index.html", assessment_results: assessment_results)
   end
 
-  def new(conn, _params) do
-    changeset = Assessments.change_result(%Result{})
-    render(conn, "new.html", changeset: changeset)
+  def new(conn, params) do
+    assessments = Assessments.list_assessments() |> map_for_select
+    students = Zipcoder.Accounts.list_students() |> map_students_for_select
+    changeset = Assessments.change_result(%Result{assessment_id: params["assessment_id"], student_id: params["student_id"]})
+    render(conn, "new.html", changeset: changeset, assessments: assessments, students: students)
+  end
+
+  def map_students_for_select(students) do
+    Enum.map(students, &{&1.first_name <> " " <> &1.last_name, &1.id})
+  end
+
+  def map_for_select(models) do
+    Enum.map(models, &{&1.name, &1.id})
   end
 
   def create(conn, %{"result" => result_params}) do
@@ -31,9 +41,11 @@ defmodule ZipcoderWeb.ResultController do
   end
 
   def edit(conn, %{"id" => id}) do
+    assessments = Assessments.list_assessments() |> map_for_select
+    students = Zipcoder.Accounts.list_students() |> map_students_for_select
     result = Assessments.get_result!(id)
     changeset = Assessments.change_result(result)
-    render(conn, "edit.html", result: result, changeset: changeset)
+    render(conn, "edit.html", result: result, changeset: changeset, assessments: assessments, students: students)
   end
 
   def update(conn, %{"id" => id, "result" => result_params}) do

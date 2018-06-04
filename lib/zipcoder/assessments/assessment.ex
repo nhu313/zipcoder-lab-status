@@ -9,6 +9,8 @@ defmodule Zipcoder.Assessments.Assessment do
     field :passing_score, :integer
     field :type, :string
 
+    has_many :results, Zipcoder.Assessments.Result
+
     timestamps()
   end
 
@@ -16,6 +18,6 @@ defmodule Zipcoder.Assessments.Assessment do
   def changeset(assessment, attrs) do
     assessment
     |> cast(attrs, [:name, :max_score, :passing_score, :type])
-    |> validate_required([:name, :max_score, :passing_score, :type])
+    |> validate_required([:name, :max_score])
   end
 end

@@ -26,8 +26,11 @@ defmodule ZipcoderWeb.AssessmentController do
   end
 
   def show(conn, %{"id" => id}) do
-    assessment = Assessments.get_assessment!(id)
-    render(conn, "show.html", assessment: assessment)
+    assessment = Assessments.get_assessment_with_results(id)
+    students_without_result = Assessments.students_without_result(id)
+    render(conn, "show.html", assessment: assessment,
+                              students_without_result: students_without_result,
+                              percent_completed: length(assessment.results)/38)
   end
 
   def edit(conn, %{"id" => id}) do

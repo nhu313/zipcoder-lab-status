@@ -6,6 +6,8 @@ defmodule Zipcoder.Assessments do
   import Ecto.Query, warn: false
   alias Zipcoder.Repo
 
+  alias Zipcoder.Assessments.Result
+
   alias Zipcoder.Assessments.Assessment
 
   @doc """
@@ -19,6 +21,20 @@ defmodule Zipcoder.Assessments do
   """
   def list_assessments do
     Repo.all(Assessment)
+  end
+
+  def get_assessment_with_results(id) do
+    Assessment
+    |> where([a], a.id == ^id)
+    |> preload([a], [results: [:student]])
+    |> Repo.one
+  end
+
+  def students_without_result(assessment_id) do
+    Zipcoder.Accounts.Student
+    |> join(:left, [student], result in Result, result.assessment_id == ^assessment_id and result.student_id == student.id)
+    |> where([_, result], is_nil(result.id))
+    |> Repo.all
   end
 
   @doc """

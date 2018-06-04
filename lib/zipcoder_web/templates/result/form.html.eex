@@ -7,13 +7,13 @@
 
   <div class="form-group">
     <%= label f, :assessment_id, class: "control-label" %>
-    <%= number_input f, :assessment_id, class: "form-control" %>
+    <%= select f, :assessment_id, @assessments, class: "form-control" %>
     <%= error_tag f, :assessment_id %>
   </div>
 
   <div class="form-group">
     <%= label f, :student_id, class: "control-label" %>
-    <%= number_input f, :student_id, class: "form-control" %>
+    <%= select f, :student_id, @students, class: "form-control" %>
     <%= error_tag f, :student_id %>
   </div>
 

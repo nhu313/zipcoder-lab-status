@@ -4,10 +4,11 @@ defmodule Zipcoder.Assessments.Result do
 
 
   schema "assessment_results" do
-    field :assessment_id, :integer
     field :score, :integer
-    field :student_id, :integer
     field :notes, :string
+
+    belongs_to :student, Zipcoder.Accounts.Student
+    belongs_to :assessment, Zipcoder.Assessments.Assessment
 
     timestamps()
   end
