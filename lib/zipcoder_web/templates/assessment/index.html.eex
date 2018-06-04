@@ -1,0 +1,32 @@
+<h2>Listing Assessments</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Max score</th>
+      <th>Passing score</th>
+      <th>Type</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for assessment <- @assessments do %>
+    <tr>
+      <td><%= assessment.name %></td>
+      <td><%= assessment.max_score %></td>
+      <td><%= assessment.passing_score %></td>
+      <td><%= assessment.type %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: assessment_path(@conn, :show, assessment), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: assessment_path(@conn, :edit, assessment), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: assessment_path(@conn, :delete, assessment), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Assessment", to: assessment_path(@conn, :new) %></span>

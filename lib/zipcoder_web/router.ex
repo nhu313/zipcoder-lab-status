@@ -27,6 +27,8 @@ defmodule ZipcoderWeb.Router do
     resources "/labs/status_logs", StatusLogsController
     resources "/labs", LabController
     resources "/lab_statuses", StatusController
+
+    resources "/assessments", AssessmentController
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,28 @@
+<h2>Show Assessment</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @assessment.name %>
+  </li>
+
+  <li>
+    <strong>Max score:</strong>
+    <%= @assessment.max_score %>
+  </li>
+
+  <li>
+    <strong>Passing score:</strong>
+    <%= @assessment.passing_score %>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @assessment.type %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: assessment_path(@conn, :edit, @assessment) %></span>
+<span><%= link "Back", to: assessment_path(@conn, :index) %></span>
