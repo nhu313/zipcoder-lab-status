@@ -8,7 +8,7 @@
       <th>Lab progress</th>
       <th>Git username</th>
       <%= for assessment <- @assessments do %>
-        <th><%= assessment.name %></th>
+        <th><%= link assessment.name, to: assessment_path(@conn, :show, assessment) %></th>
       <% end %>
       <th></th>
     </tr>
