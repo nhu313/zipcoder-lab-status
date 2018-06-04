@@ -1,12 +1,6 @@
-<h2>Show Assessment</h2>
+<h2><%= @assessment.name %></h2>
 
 <ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @assessment.name %>
-  </li>
-
   <li>
     <strong>Max score:</strong>
     <%= @assessment.max_score %>
@@ -64,7 +58,7 @@
   </tbody>
 </table>
 <br />
-<table class="table">
+<table class="table table-striped">
   <thead class="thead-light">
     <tr>
       <th scope="col">Student</th>
