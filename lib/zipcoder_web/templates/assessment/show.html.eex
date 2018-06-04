@@ -39,6 +39,7 @@
     <tr>
       <th scope="col">Student</th>
       <th scope="col">Score</th>
+      <th scope="col">Percent</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -50,6 +51,13 @@
           (<%= result.student.gitusername %>)
         </td>
         <td><%= result.score %></td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: <%= Formatter.percent(result.score/@assessment.max_score) %>">
+              <%= Formatter.percent(result.score/@assessment.max_score) %>
+            </div>
+          </div>
+        </td>
         <td><%= link "Edit", to: result_path(@conn, :edit, result), class: "btn btn-default btn-xs" %></td>
       </tr>
     <% end %>
