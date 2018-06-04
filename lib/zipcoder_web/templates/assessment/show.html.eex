@@ -50,6 +50,7 @@
           (<%= result.student.gitusername %>)
         </td>
         <td><%= result.score %></td>
+        <td><%= link "Edit", to: result_path(@conn, :edit, result), class: "btn btn-default btn-xs" %></td>
       </tr>
     <% end %>
   </tbody>

@@ -34,6 +34,7 @@ defmodule Zipcoder.Assessments do
     Zipcoder.Accounts.Student
     |> join(:left, [student], result in Result, result.assessment_id == ^assessment_id and result.student_id == student.id)
     |> where([_, result], is_nil(result.id))
+    |> order_by([student, _], asc: student.first_name)
     |> Repo.all
   end
 

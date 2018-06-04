@@ -29,7 +29,7 @@ defmodule ZipcoderWeb.ResultController do
       {:ok, result} ->
         conn
         |> put_flash(:info, "Result created successfully.")
-        |> redirect(to: result_path(conn, :show, result))
+        |> redirect(to: assessment_path(conn, :show, result.assessment_id))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
