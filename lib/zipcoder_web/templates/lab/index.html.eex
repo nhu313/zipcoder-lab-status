@@ -1,5 +1,5 @@
 <h2>Labs</h2>
-<table class="table">
+<table class="table" id="labs_table">
   <thead>
     <tr>
       <th>ID</th>
@@ -46,3 +46,8 @@
     <% end %>
   </div>
 </div>
+<script>
+$(document).ready( function () {
+    $('#labs_table').DataTable({paging: false});
+} );
+</script>

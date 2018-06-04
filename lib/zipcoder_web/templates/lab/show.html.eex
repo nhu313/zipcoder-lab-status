@@ -16,7 +16,7 @@
     <%= Formatter.percent(@percent_completed) %>
   </div>
 </div>
-<table class="table">
+<table class="table" id="completed_students">
   <thead class="thead-light">
     <tr>
       <th scope="col">Student</th>
@@ -31,7 +31,7 @@
           <%= link Formatter.student_name(status.student), to: student_path(@conn, :show, status.student) %>
           (<%= status.student.gitusername %>)
         </td>
-        <td><%= link "PR", to: status.url %></td>
+        <td><%= link "PR", to: (status.url || "") %></td>
         <td>
           <%= link "Delete", to: lab_status_path(@conn, :delete, status), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
         </td>
@@ -42,7 +42,7 @@
 <br />
 <h4>Not completed (<%= Formatter.inverse_percent(@percent_completed) %> - <%= length(@students_without_pr) %>)</h4>
 <hr />
-<table class="table">
+<table class="table" id="not_completed_students">
   <thead class="thead-light">
     <tr>
       <th scope="col">Student</th>
@@ -67,3 +67,10 @@
 <br/>
 <span><%= link "Back", to: lab_path(@conn, :index), class: "btn btn-info btn-xs"%></span>
 <span><%= link "Delete", to: lab_path(@conn, :delete, @lab), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+
+<script>
+$(document).ready( function () {
+    $('#completed_students').DataTable({paging: false});
+    $('#not_completed_students').DataTable({paging: false});
+} );
+</script>

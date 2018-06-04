@@ -1,6 +1,6 @@
 <h2>Students (<%= length(@students) %>)</h2>
 
-<table class="table">
+<table class="table" id="students_table">
   <thead>
     <tr>
       <th>ID</th>
@@ -50,3 +50,9 @@
     <% end %>
   </div>
 </div>
+
+<script>
+$(document).ready( function () {
+    $('#students_table').DataTable({paging: false});
+} );
+</script>

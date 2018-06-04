@@ -34,7 +34,7 @@
     <%= Formatter.percent(@percent_completed) %>
   </div>
 </div>
-<table class="table">
+<table class="table" id="assessment_results">
   <thead class="thead-light">
     <tr>
       <th scope="col">Student</th>
@@ -79,3 +79,9 @@
   </tbody>
 </table>
 <br />
+
+<script>
+$(document).ready( function () {
+    $('#assessment_results').DataTable({paging: false});
+} );
+</script>
