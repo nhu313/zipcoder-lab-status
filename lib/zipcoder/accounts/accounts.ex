@@ -33,7 +33,7 @@ defmodule Zipcoder.Accounts do
     total_lab_count = Labs.count_labs()
 
     Student
-    |> preload([student], [:lab_statuses])
+    |> preload([student], [:lab_statuses, :assessment_results])
     |> order_by([student], asc: student.first_name)
     |> Repo.all()
     |> Enum.map(&(add_labs_completed_percent(&1, total_lab_count)))

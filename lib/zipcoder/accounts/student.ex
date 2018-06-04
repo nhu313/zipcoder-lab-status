@@ -10,6 +10,7 @@ defmodule Zipcoder.Accounts.Student do
     field :labs_completed_percent, :integer, virtual: true, default: 0
 
     has_many :lab_statuses, Zipcoder.Students.LabStatus, on_delete: :delete_all
+    has_many :assessment_results, Zipcoder.Assessments.Result
 
     timestamps()
   end

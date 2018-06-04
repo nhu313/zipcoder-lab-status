@@ -5,6 +5,7 @@ defmodule ZipcoderWeb.StudentController do
   alias Zipcoder.Accounts.Student
   alias Zipcoder.Accounts.StudentService
   alias Zipcoder.Labs
+  alias Zipcoder.Assessments.Result
 
   def create_all(conn,  %{"file" => file}) do
     StudentService.create_from_file(file)
@@ -12,8 +13,28 @@ defmodule ZipcoderWeb.StudentController do
   end
 
   def index(conn, _params) do
-    students = Accounts.list_students_with_info()
-    render(conn, "index.html", students: students)
+    assessments = Zipcoder.Assessments.list_assessments()
+    students = Accounts.list_students_with_info() |> Enum.map(&(map_results(&1, assessments)))
+    render(conn, "index.html", students: students, assessments: assessments)
+  end
+
+  def map_results(student, assessments) do
+    results = student.assessment_results
+    sorted_results = assessments
+                      |> IO.inspect
+                      |> Enum.map(&(%Result{score: find_score(&1, results), assessment: &1, student: student}))
+                      |> IO.inspect
+
+    Map.put(student, :assessment_results, sorted_results)
+  end
+
+  def find_score(assessment, results) do
+    result = Enum.find(results, &(&1.assessment_id == assessment.id))
+    if result do
+      result.score
+    else
+      0
+    end
   end
 
   def new(conn, _params) do

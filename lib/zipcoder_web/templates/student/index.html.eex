@@ -7,7 +7,9 @@
       <th>Name</th>
       <th>Lab progress</th>
       <th>Git username</th>
-      <th>Created at</th>
+      <%= for assessment <- @assessments do %>
+        <th><%= assessment.name %></th>
+      <% end %>
       <th></th>
     </tr>
   </thead>
@@ -24,7 +26,9 @@
         </div>
       </td>
       <td><%= student.gitusername %></td>
-      <td><%= student.inserted_at %></td>
+      <%= for result <- student.assessment_results do %>
+        <td><%= result.score %></td>
+      <% end %>
       <td class="text-right">
         <span><%= link "Edit", to: student_path(@conn, :edit, student), class: "btn btn-default btn-xs" %></span>
         <span><%= link "Delete", to: student_path(@conn, :delete, student), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
