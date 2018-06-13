@@ -42,28 +42,17 @@
 <br />
 <h4>Not completed (<%= Formatter.inverse_percent(@percent_completed) %> - <%= length(@students_without_pr) %>)</h4>
 <hr />
-<table class="table" id="not_completed_students">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">Student</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= for student <- @students_without_pr do %>
-      <tr>
-        <td>
-          <%= link Formatter.student_name(student), to: student_path(@conn, :show, student) %>
-          (<%= student.gitusername %>)
-        </td>
-        <td>
-          <%= link "New lab status", to: lab_status_path(@conn, :new, student_id: student.id, lab_id: @lab.id),
-              class: "btn btn-success btn-xs" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<%= form_for @conn, "/labs/statuses/create_all", [multipart: true], fn form -> %>
+  <%= hidden_input(form, :lab_id, value: @lab.id) %>
+  <div class="student_multi_select">
+    <%= multiple_select(form, :student_ids, @students_without_pr) %>
+  </div>
+  <br \>
+  <br \>
+  <%= submit "Submit" %>
+<% end %>
+
 <br/>
 <span><%= link "Back", to: lab_path(@conn, :index), class: "btn btn-info btn-xs"%></span>
 <span><%= link "Delete", to: lab_path(@conn, :delete, @lab), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>

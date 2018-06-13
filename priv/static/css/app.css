@@ -5,6 +5,11 @@ main {
   margin: auto;
 }
 
+.student_multi_select select {
+  width: 500px;
+  height: 700px;
+}
+
 /* Includes Bootstrap as well as some default style for the starter
  * application. This can be safely deleted to start fresh.
  */

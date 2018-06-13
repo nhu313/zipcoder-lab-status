@@ -10,6 +10,11 @@ defmodule ZipcoderWeb.LabStatusController do
     text(conn, "Created!")
   end
 
+  def create_all(conn, params) do
+    Students.create_multiple_lab_statuses(params)
+    redirect(conn, to: lab_path(conn, :show, params["lab_id"]))
+  end
+
   def index(conn, _params) do
     student_lab_statuses = Students.list_student_lab_statuses()
     render(conn, "index.html", student_lab_statuses: student_lab_statuses)

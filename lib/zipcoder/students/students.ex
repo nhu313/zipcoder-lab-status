@@ -57,6 +57,12 @@ defmodule Zipcoder.Students do
     |> Repo.insert()
   end
 
+  def create_multiple_lab_statuses(%{"lab_id" => lab_id, "student_ids" => student_ids}) do
+    student_ids
+    |> Enum.map(&(%{"lab_id" => lab_id, "student_id" => &1, "status_id" => 1}))
+    |> Enum.map(&create_lab_status/1)
+  end
+
   @doc """
   Updates a lab_status.
 

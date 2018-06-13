@@ -81,6 +81,7 @@ defmodule Zipcoder.Labs do
     Student
     |> join(:left, [student], lab_status in LabStatus, lab_status.lab_id == ^lab_id and lab_status.student_id == student.id)
     |> where([_, lab_status], is_nil(lab_status.id))
+    |> order_by([student, _], [asc: student.first_name])
     |> Repo.all
   end
 

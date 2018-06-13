@@ -4,3 +4,8 @@ main {
   width: 80%;
   margin: auto;
 }
+
+.student_multi_select select {
+  width: 500px;
+  height: 700px;
+}

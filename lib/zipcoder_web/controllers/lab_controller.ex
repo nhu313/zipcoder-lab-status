@@ -33,9 +33,12 @@ defmodule ZipcoderWeb.LabController do
 
   def show(conn, %{"id" => id}) do
     lab = Labs.get_lab_with_students(id)
-    students_without_pr = Labs.students_without_pr_for_lab(lab)
+    students_without_pr = lab
+                          |> Labs.students_without_pr_for_lab
+                          |> Enum.map(&({"#{&1.first_name } (#{&1.gitusername})", &1.id}))
     # so total would never be 0. don't judge my hackiness. it's a throwaway project
     total = length(lab.lab_statuses) + length(students_without_pr) + 0.000001
+
     render(conn, "show.html", lab: lab,
                               students_without_pr: students_without_pr,
                               percent_completed: length(lab.lab_statuses)/total)
