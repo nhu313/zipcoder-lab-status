@@ -27,7 +27,7 @@ defmodule ZipcoderWeb.LabStatusController do
       {:ok, lab_status} ->
         conn
         |> put_flash(:info, "Lab status created successfully.")
-        |> redirect(to: student_path(conn, :show, lab_status.student_id))
+        |> redirect(to: lab_path(conn, :show, lab_status.lab_id))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
