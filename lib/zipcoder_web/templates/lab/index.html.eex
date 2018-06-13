@@ -14,7 +14,9 @@
         <tr>
           <td><%= lab.id %></td>
           <td><%= link lab.name, to: lab_path(@conn, :show, lab) %></td>
-          <td><%= link lab.repo_name, to: "https://git.zipcode.rocks/ZipCodeWilmington/" <> lab.repo_name %></td>
+          <td>
+            <%= link lab.repo_name, to: Formatter.repo_link(lab.repo_name) %>
+          </td>
           <td>
             <%= length(lab.lab_statuses) %> Completed
             <div class="progress">

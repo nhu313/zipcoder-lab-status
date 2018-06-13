@@ -13,4 +13,12 @@ defmodule Zipcoder.Formatter do
   end
 
   def student_name(_), do: ""
+
+  def repo_link("http" <> _ = link) do
+    link
+  end
+
+  def repo_link(lab_name) do
+    "https://git.zipcode.rocks/ZipCodeWilmington/" <> lab_name
+  end
 end

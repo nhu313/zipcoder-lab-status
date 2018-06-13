@@ -38,7 +38,7 @@
   <%= for lab <- @labs_without_pr do %>
     <li>
       <%= link lab.name, to: lab_path(@conn, :show, lab) %>
-      (<%= link "Repo", to: "https://git.zipcode.rocks/ZipCodeWilmington/" <> lab.repo_name %>)
+      (<%= link "Repo", to: Formatter.repo_link(lab.repo_name) %>)
       <%= link "New lab status", to: lab_status_path(@conn, :new, student_id: @student.id, lab_id: lab.id),
           class: "btn btn-xs" %>
     </li>

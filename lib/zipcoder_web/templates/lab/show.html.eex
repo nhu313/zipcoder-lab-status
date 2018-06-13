@@ -3,7 +3,7 @@
 <div>
   <strong>Repo name:</strong>
   <%= @lab.repo_name %>
-  (<%= link "Repo", to: "https://git.zipcode.rocks/ZipCodeWilmington/" <> @lab.repo_name %>)
+  (<%= link "Repo", to: Formatter.repo_link(@lab.repo_name)%>)
 </div>
 <div>
   <strong>Order:</strong>
